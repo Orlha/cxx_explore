@@ -12,5 +12,4 @@ int main() {
 	print(s);
 	print("\n");
 	print("{}\n", s);
-
 }
