@@ -30,6 +30,7 @@ namespace Scoped {
 	}
 }
 
+#if 1
 static std::string to_string(A a) {
 	switch(a) {
 		case A1: return "A1";
@@ -37,6 +38,31 @@ static std::string to_string(A a) {
 		case A3: return "A3";
 	}
 }
+#endif
+
+static void print_what();
+
+class EClass {
+	public:
+	enum E {
+		E1, E2, E3,
+	};
+friend std::string to_string(EClass::E e) {
+	switch(e) {
+		case EClass::E1: return "E1";
+		case EClass::E2: return "E2";
+		case EClass::E3: return "E3";
+	}
+}
+friend void print_ok(EClass a) {
+	std::cout << "ok\n";
+}
+friend void print_what() {
+	std::cout << "what\n";
+}
+};
+
+
 
 namespace Logger {
 
@@ -64,4 +90,12 @@ int main() {
 	log(B2);
 	log(C::C2);
 	log(Scoped::D::D2);
+	log(EClass::E::E2);
+	EClass ec1;
+	//std::cout << ::to_string(EClass::E2);
+	print_ok(EClass{});
+	print_what();
+	//ec1.to_string(EClass::E2);
+	//std::cout << EClass::to_string(E2);
+
 }
